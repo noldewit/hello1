@@ -71,29 +71,25 @@ spec:
           workspace: maven-settings
         - name: maven-local-repo
           workspace: maven-local-m2
-#    - name: build-image
-#      runAfter: [ "log-it2" ]
-#      taskRef:
-#        name: kaniko
-#      workspaces:
-#        - name: source
-#          workspace: source-workspace
-##        - name: maven-settings
-##          workspace: maven-settings
-##        - name: maven-local-repo
-##          workspace: maven-local-m2
-#      params:
-#        - name: IMAGE
-#          value: bekantje-image-name
-#    - name: log-it3
-#      taskRef:
-#        name: log
-#      runAfter: [ "build-image" ]
-#      workspaces:
-#        - name: source
-#          workspace: source-workspace
-#        - name: maven-settings
-#          workspace: maven-settings
-#        - name: maven-local-repo
-#          workspace: maven-local-m2
+    - name: build-image
+      runAfter: [ "log-it2" ]
+      taskRef:
+        name: kaniko
+      workspaces:
+        - name: source
+          workspace: source-workspace
+      params:
+        - name: IMAGE
+          value: 10.42.0.236:5000/bekant:bekant-image-01
+    - name: log-it3
+      taskRef:
+        name: log
+      runAfter: [ "build-image" ]
+      workspaces:
+        - name: source
+          workspace: source-workspace
+        - name: maven-settings
+          workspace: maven-settings
+        - name: maven-local-repo
+          workspace: maven-local-m2
 
