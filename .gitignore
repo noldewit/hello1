@@ -1,0 +1,30 @@
+# Log file
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IDE metadata
+.classpath
+.project
+.settings
+
+# MacOS metadata
+._.DS_Store
+.DS_Store
+
+
+# IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
+
+scripts/.tmp
+test-output/
