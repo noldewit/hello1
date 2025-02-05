@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bekant-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bekant-app
+  template:
+    metadata:
+      labels:
+        app: bekant-app
+    spec:
+      containers:
+        - name: bekant
+          image: 10.42.0.236:5000/bekant:bekant-image-01
+          ports:
+            - containerPort: 8081
