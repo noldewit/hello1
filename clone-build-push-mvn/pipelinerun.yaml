@@ -10,15 +10,13 @@ spec:
       fsGroup: 65532
   workspaces:
     - name: maven-settings
-      emptyDir: {}
-    - name: shared-workspace
-      volumeClaimTemplate:
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 500Mi
+      subPath: maven-repo-cache
+      persistentVolumeClaim:
+        claimName: source-pvc
+    - name: source-workspace
+      subPath: source
+      persistentVolumeClaim:
+        claimName: source-pvc
     - name: maven-local-m2
       volumeClaimTemplate:
         spec:

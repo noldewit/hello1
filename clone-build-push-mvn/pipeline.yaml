@@ -6,7 +6,7 @@ spec:
   description: |
     This pipeline clones a git repo, builds using mvn and then more?
   workspaces:
-    - name: shared-workspace
+    - name: source-workspace
     - name: maven-settings
     - name: maven-local-m2
   params:
@@ -20,7 +20,7 @@ spec:
         name: git-clone
       workspaces:
         - name: output
-          workspace: shared-workspace
+          workspace: source-workspace
       params:
         - name: url
           value: $(params.repo-url)
@@ -34,7 +34,7 @@ spec:
         name: log
       workspaces:
         - name: source
-          workspace: shared-workspace
+          workspace: source-workspace
         - name: maven-settings
           workspace: maven-settings
         - name: maven-local-repo
@@ -45,7 +45,7 @@ spec:
         name: maven
       workspaces:
         - name: source
-          workspace: shared-workspace
+          workspace: source-workspace
         - name: maven-settings
           workspace: maven-settings
         - name: maven-local-repo
@@ -53,6 +53,7 @@ spec:
       params:
         - name: GOALS
           value:
+            - -Dmaven.repo.local=$(workspaces.maven-settings.path)
             - -DskipTests
             - clean
             - compile
@@ -65,34 +66,34 @@ spec:
       runAfter: [ "build-mvn" ]
       workspaces:
         - name: source
-          workspace: shared-workspace
+          workspace: source-workspace
         - name: maven-settings
           workspace: maven-settings
         - name: maven-local-repo
           workspace: maven-local-m2
-    - name: build-image
-      runAfter: [ "log-it2" ]
-      taskRef:
-        name: kaniko
-      workspaces:
-        - name: source
-          workspace: shared-workspace
+#    - name: build-image
+#      runAfter: [ "log-it2" ]
+#      taskRef:
+#        name: kaniko
+#      workspaces:
+#        - name: source
+#          workspace: source-workspace
+##        - name: maven-settings
+##          workspace: maven-settings
+##        - name: maven-local-repo
+##          workspace: maven-local-m2
+#      params:
+#        - name: IMAGE
+#          value: bekantje-image-name
+#    - name: log-it3
+#      taskRef:
+#        name: log
+#      runAfter: [ "build-image" ]
+#      workspaces:
+#        - name: source
+#          workspace: source-workspace
 #        - name: maven-settings
 #          workspace: maven-settings
 #        - name: maven-local-repo
 #          workspace: maven-local-m2
-      params:
-        - name: IMAGE
-          value: bekantje-image-name
-    - name: log-it3
-      taskRef:
-        name: log
-      runAfter: [ "build-image" ]
-      workspaces:
-        - name: source
-          workspace: shared-workspace
-        - name: maven-settings
-          workspace: maven-settings
-        - name: maven-local-repo
-          workspace: maven-local-m2
 
