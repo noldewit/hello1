@@ -1,0 +1,21 @@
+# this deployment is not part of the pipeline but just a test to see if the
+# image is accessible
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bekant-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bekant-deploy-app
+  template:
+    metadata:
+      labels:
+        app: bekant-deploy-app
+    spec:
+      containers:
+        - name: bekant
+          image: 10.42.0.236:5000/bekant:bekant-image-01
+          ports:
+            - containerPort: 8081

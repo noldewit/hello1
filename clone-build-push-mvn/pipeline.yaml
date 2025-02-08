@@ -80,6 +80,7 @@ spec:
           workspace: source-workspace
       params:
         - name: IMAGE
+#          value: localhost:5000/bekant:bekant-image-01
           value: 10.42.0.236:5000/bekant:bekant-image-01
     - name: log-it3
       taskRef:
