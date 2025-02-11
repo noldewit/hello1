@@ -29,4 +29,5 @@ spec:
     - name: repo-url
       value: https://github.com/noldewit/bekant.git
     - name: image-reference
-      value: 10.42.0.24:5000/bekant:0.0.1
+      value: noldock/bekant:0.0.1
+#      value: 10.42.0.24:5000/bekant:0.0.1

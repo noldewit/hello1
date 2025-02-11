@@ -81,7 +81,8 @@ spec:
       params:
         - name: IMAGE
 #          value: localhost:5000/bekant:bekant-image-01
-          value: 10.42.0.236:5000/bekant:bekant-image-01
+#          value: 10.42.0.236:5000/bekant:bekant-image-01
+          value: $(params.image-reference)
     - name: log-it3
       taskRef:
         name: log
